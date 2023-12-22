@@ -1,10 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../AuthProvider/AuthPro";
-import Newdata from "./Newdata";
+import All from "./All";
 
 
-const New  = () => {
+
+const Managealltask = () => {
+
+ 
   const [data, setdata] = useState([]);
   const { user } = useContext(AuthContext);
 
@@ -13,8 +16,6 @@ const New  = () => {
       .then((res) => res.json())
       .then((data) => setdata(data));
   }, [user]);
-
-
 
   const handledlt = (_id) => {
     Swal.fire({
@@ -48,22 +49,22 @@ const New  = () => {
     });
   };
 
-
+         
 
 
     return (
       <div>
       
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mx-auto items-center justify-center gap-3 ">
-        {data.map((item) => (
-          <div key={item._id} className="handle">
-           <Newdata  handledlt={handledlt} data={item}></Newdata>
-          </div>
-        ))}
-      </div>
-    
-  </div>
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mx-auto items-center justify-center gap-3 ">
+          {data.map((item) => (
+            <div key={item._id} className="handle">
+              <All handledlt={handledlt} data={item} />
+            </div>
+          ))}
+        </div>
+      
+    </div>
     );
 };
 
-export default New ;
+export default Managealltask;

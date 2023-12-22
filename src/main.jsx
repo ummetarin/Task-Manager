@@ -21,6 +21,8 @@ import AddTask from './Components/AddTask/AddTask';
 import Up from './Components/UpdateTask.jsx/Up';
 import Viewpro from './Components/ViewProfile]/Viewpro';
 import Edit from './Components/ViewProfile]/Edit';
+import Managealltask from './Components/Alltask.jsx/Managealltask';
+import DataofCom from './Components/com/DataofCom';
 
 const router = createBrowserRouter([
   {
@@ -49,7 +51,7 @@ const router = createBrowserRouter([
         element:<Dashboardtabs></Dashboardtabs>
       },{
         path:'/des/all',
-        element:<All></All>
+        element:<Managealltask></Managealltask>
       },{
         path:'/des/on',
         element:<Ongoing></Ongoing>
@@ -66,14 +68,20 @@ const router = createBrowserRouter([
         path:"/des/add",
         element:<AddTask></AddTask>
       },{
-        path:"/des/up",
-        element:<Up></Up>
+        path:"/des/up/:id",
+        element:<Up></Up>,
+        loader:({params})=>fetch(`http://localhost:5000/task/data/${params.id}`),
       },{
         path:'/des/v',
         element:<Viewpro></Viewpro>
       },{
         path:'/des/e',
-        element:<Edit></Edit>
+        element:<Edit></Edit>,
+     
+      },{
+        path:'/des/complete/:id',
+        element:<DataofCom></DataofCom>,
+        loader:({params})=>fetch(`http://localhost:5000/task/data/${params.id}`),
       }
     ]
   }

@@ -1,25 +1,31 @@
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../AuthProvider/AuthPro";
+import DataComp from "./DataComp";
 
 
 const Complete = () => {
+
+  const [data, setdata] = useState([]);
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/com/data/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => setdata(data));
+  }, [user]);
+
     return (
-        <div>
-            
-            
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
-        <div>
-         <div className="card  bg-neutral text-neutral-content">
-  <div className="card-body items-center text-center">
-    <h2 className="card-title">Cookies!</h2>
-    <p>We are using cookies for no reason.</p>
-    <div className="card-actions justify-end">
-      <button className="btn btn-primary">Accept</button>
-      <button className="btn btn-ghost">Deny</button>
-    </div>
+      <div>
+      
+      <div className=" flex flex-col gap-8 ">
+        {data.map((item) => (
+          <div key={item._id} className="handle">
+            <DataComp  data={item}></DataComp>
+          </div>
+        ))}
+      </div>
+    
   </div>
-</div>
-         </div>
-        </div>
-        </div>
     );
 };
 

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const Viewpro = () => {
 
     const {user}=useContext(AuthContext);
+
     return (
         <div className="bg-purple-400 h-[300px] md:w-[600px] w-[250px]">
            <div className="flex justify-center mx-auto pb-2 pt-7 ">
